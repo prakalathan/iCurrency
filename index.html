@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Currency Converter for INR</title>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="js/app.js"></script>
+	</head>
+	<body ng-app="myApp">
+		<section ng-controller="myCtrl">
+			<div class="container">
+				<h1 class="text-center"><i class="fa fa-money" aria-hidden="true"></i> iCurrency</h1>
+				<form ng-if="loginPage" name="myForm1" ng-submit="loginFun()">
+				  <div class="form-group">
+				    <label for="inputEmail1">Email address</label>
+				    <input type="email" name="myMail" class="form-control" id="inputEmail1" placeholder="Email" ng-model="myForm.myMail" required>
+				    <span class="err-msg" ng-show="myForm1.myMail.$touched &&!myForm1.myMail.$valid">The Mail is required.</span>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword1">Password</label>
+				    <input type="password" name="myPwd" ng-model="myForm.myPwd"class="form-control" id="inputPassword1" placeholder="Password" required>
+				     <span class="err-msg" ng-show="myForm1.myPwd.$touched &&!myForm1.myPwd.$valid">Password is required.</span>
+				  </div>
+				  <button type="submit" class="btn btn-info">Login</button>
+				  <span>or</span>
+				  <a href="#" class="link-green" ng-click="registerAccount()">Register</a>
+				</form>
+				<form ng-if="registerPage" name="myForm2" ng-submit="registerFun()">
+				  <div class="form-group">
+				    <label for="inputEmail1">Email address</label>
+				    <input type="email" ng-model="myForm.myMailData" class="form-control" id="inputEmail1" name="myMail" placeholder="Email" required>
+				    <span class="err-msg" ng-show="myForm2.myMail.$touched &&!myForm2.myMail.$valid">The Mail is required.</span>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword1">Password</label>
+				    <input type="password" name="myPwd" ng-model="myForm.myPwdData" class="form-control" id="inputPassword1" placeholder="Password" required>
+				    <span class="err-msg" ng-show="myForm2.myPwd.$touched &&!myForm2.myPwd.$valid">Password is required.</span>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword2">Confirm Password</label>
+				    <input type="password" name="myPwdCon" ng-model="myForm.myPwdConData" class="form-control" id="inputPassword2" placeholder="Password" valid-password-c required>
+				     <span class="err-msg" ng-show="myForm2.myPwdCon.$error.required && myForm2.myPwdCon.$dirty">Please confirm your password.</span>
+				    <span class="err-msg" ng-show="!myForm2.myPwdCon.$error.required && myForm2.myPwdCon.$error.noMatch && myForm2.myPwd.$dirty">Passwords do not match.</span>
+				  </div>
+				  <button type="submit" class="btn btn-success">Register</button>
+				  <span>or</span>
+				  <a href="#" class="link-blue" ng-click="loginAccount()">Login</a>
+				</form>
+				<form class="form-horizontal margin-top30" ng-if="mainPage">
+				  <div class="form-group">
+				    <label for="inrVal" class="col-sm-5 control-label">INR</label>
+				    <div class="col-sm-2">
+				      <input type="number" class="form-control" id="inrVal" placeholder="Amount" ng-model="inrVal" required>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="curSel" class="col-sm-5 control-label">Select Currency</label>
+				    <div class="col-sm-2">
+				      <select class="form-control" name="curSel" id="curSel" ng-model="curSel">
+				      	<option ng-repeat="(key, value) in curVal.rates" ng-selected="{{value == curSel}}" value="{{value}}">{{key}}</option>
+				      </select>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="col-sm-5 control-label">Currency rate</label>
+				    <div class="col-sm-7 amount-text"><strong><i class="fa fa-inr" aria-hidden="true"></i> {{curSel*inrVal}}</strong></div>
+				  </div>
+				</form>
+			</div>
+		</section>
+	</body>
+</html>
