@@ -4,7 +4,7 @@ app.controller('myCtrl', function($scope, $http) {
     $scope.registerPage = false;
     $scope.mainPage = false;
     $scope.myForm = {};
-    $scope.inrVal = 1;
+    $scope.inrVal = 0;
     $scope.curSel = 0;
     $scope.registerAccount = function() {
     	$scope.registerPage = true;
